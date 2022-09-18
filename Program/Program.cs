@@ -2,23 +2,33 @@
 Console.Write("Введите количество элементов для ввода: ");
 int sizeFirstArray = Convert.ToInt32(Console.ReadLine());
 string?[] wordArray = new string[sizeFirstArray];
-int sizeSecondArray = 0;
 
-for (int i = 0; i < sizeFirstArray; i++)
-{
-    Console.Write($"Введите {i + 1} слово: ");
-    wordArray[i] = Console.ReadLine();
-    if (wordArray[i]?.Length <= 3) sizeSecondArray++;
-}
+int sizeResultArray = SizeResultArray(wordArray);
+GetResultArray(wordArray, sizeResultArray);
 
-string?[] resultWordArray = new string[sizeSecondArray];
-int j = 0;
-for (int i = 0; i < sizeFirstArray; i++)
+int SizeResultArray(string?[] array)
 {
-    if (wordArray[i]?.Length <= 3) 
+    int sizeSecondArray = 0;
+    for (int i = 0; i < sizeFirstArray; i++)
     {
-        resultWordArray[j] = wordArray[i];
-        j++;
+        Console.Write($"Введите {i + 1} слово: ");
+        wordArray[i] = Console.ReadLine();
+        if (wordArray[i]?.Length <= 3) sizeSecondArray++;
     }
+    return sizeSecondArray;
 }
-Console.WriteLine($"Элементы с количеством символов меньше, либо равные 3-м: [{String.Join(", ", resultWordArray)}]");
+
+void GetResultArray(string?[] array, int sizeSecondArray)
+{
+    string?[] resultWordArray = new string[sizeSecondArray];
+    int j = 0;
+    for (int i = 0; i < sizeFirstArray; i++)
+    {
+        if (wordArray[i]?.Length <= 3)
+        {
+            resultWordArray[j] = wordArray[i];
+            j++;
+        }
+    }
+    Console.WriteLine($"Элементы с количеством символов меньше, либо равные 3-м: [{String.Join(", ", resultWordArray)}]");
+}
